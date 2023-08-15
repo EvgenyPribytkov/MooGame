@@ -25,7 +25,7 @@ namespace MooGame
             int numberOfGuesses = 0;
 
 
-            while (playOn)
+            while (playOn) 
             {
                 numberOfGuesses += PlayOneRound(ref playOn);
             }
