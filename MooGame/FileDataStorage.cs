@@ -17,15 +17,15 @@ namespace MooGame
 
         public void SavePlayerScore(string _source, PlayerData playerData)
         {
-            StreamWriter output = new StreamWriter("result.txt", append: true);
+            StreamWriter output = new StreamWriter(_source, append: true);
             output.WriteLine(playerData.Name + "#&#" + playerData._totalGuess);
             output.Close();
         }
 
-        public string GetHighScore(string fileName)
+        public string GetHighScore()
         {
             string fileContent;
-            using (StreamReader input = new StreamReader(fileName))
+            using (StreamReader input = new StreamReader(_source))
             {
                 fileContent = input.ReadToEnd();
             }
