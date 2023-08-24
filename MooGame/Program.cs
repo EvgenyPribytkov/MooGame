@@ -8,15 +8,11 @@ namespace MooGame
     {
         public static void Main(string[] args)
         {
-            IDataStorage fileDataStorage = new FileDataStorage("HighScores.txt");
+            IDataStorage fileDataStorage = new FileDataStorage("result.txt");
             IUI ui = new ConsoleUI();
             
             GameController gameController = new GameController(fileDataStorage, ui);
             gameController.Play();
-            //string username = gameController.GetUsername();
-            //PlayerData playerData = new PlayerData(username, 0);
-            //GameMoo mooGame = new GameMoo(ui, playerData);
-            //mooGame.Play();
         }
     }
 }

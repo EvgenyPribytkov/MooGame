@@ -52,12 +52,17 @@ namespace MooGame
 
         private static bool CheckAndSetPlayOnStatus(bool playOn, string answer)
         {
-            if (answer != null && answer != "" && answer.Substring(0, 1) == "n")
+            if (ValidateAnswer(answer))
             {
                 playOn = false;
             }
 
             return playOn;
+        }
+
+        private static bool ValidateAnswer(string answer)
+        {
+            return answer != null && answer != "" && answer.Substring(0, 1) == "n";
         }
 
         private void PromptContinue()
@@ -92,7 +97,7 @@ namespace MooGame
 
         public string ProcessGuess(string goal, string bullsAndCows, string guess)
         {
-            if (String.IsNullOrEmpty(guess) || !Regex.IsMatch(guess, @"^\d{4}$"))
+            if (ValidateGuess(guess))
             {
                 ui.Print("Invalid guess. Please try again.\n");
             }
@@ -103,6 +108,11 @@ namespace MooGame
             }
 
             return bullsAndCows;
+        }
+
+        private static bool ValidateGuess(string guess)
+        {
+            return String.IsNullOrEmpty(guess) || !Regex.IsMatch(guess, @"^\d{4}$");
         }
 
         private void PrintNewGameMessage(string goal)

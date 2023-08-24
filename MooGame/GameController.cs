@@ -55,9 +55,21 @@ namespace MooGame
         {
             List<PlayerData> results = new List<PlayerData>();
 
-            string fileContent = fileHandler.GetHighScore("TopScores.txt");
+            string fileContent = fileHandler.GetHighScore();
 
             string[] lines = fileContent.Split(Environment.NewLine);
+            UpdatePlayerData(results, lines);
+
+            results.Sort((p1, p2) => p1.Average().CompareTo(p2.Average()));
+            ui.Print("Player games average");
+            foreach (PlayerData p in results)
+            {
+                ui.Print(string.Format("{0,-9}{1,5:D}{2,9:F2}", p.Name, p.NumberOfGames, p.Average()));
+            }
+        }
+
+        private static void UpdatePlayerData(List<PlayerData> results, string[] lines)
+        {
             for (int i = 0; i < lines.Length - 1; i++)
             {
                 string line = lines[i];
@@ -74,13 +86,6 @@ namespace MooGame
                 {
                     results[pos].Update(guesses);
                 }
-            }
-
-            results.Sort((p1, p2) => p1.Average().CompareTo(p2.Average()));
-            ui.Print("Player   games average");
-            foreach (PlayerData p in results)
-            {
-                ui.Print(string.Format("{0,-9}{1,5:D}{2,9:F2}", p.Name, p.NumberOfGames, p.Average()));
             }
         }
     }

@@ -9,7 +9,7 @@ namespace MooGame
     public interface IDataStorage
     {
         public void SavePlayerScore(string _source, PlayerData playerData);
-        public string GetHighScore(string fileName);
+        public string GetHighScore();
         
     }
 }
